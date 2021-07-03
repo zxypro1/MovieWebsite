@@ -1,0 +1,50 @@
+/*重置样式*/
+*{
+	padding:0;
+	margin:0;
+}
+img{
+	vertical-align:top;
+}
+ul{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	color:black;
+}
+/*浮动*/
+.fl{
+	float:left;
+}
+.fr{
+	float: right;
+}
+/*清除浮动样式*/
+.clear{
+	zoom:1;
+}
+.clearF::after{
+	content: "";
+	display: block;
+	clear:both;
+}
+/*overflow*/
+.oh{
+	overflow: hidden;
+}
+/*文本居中*/
+.textC{
+	text-align: center;
+}
+/*文本居右*/
+.textR{
+	text-align: right;
+}
+/*字体颜色*/
+.redT{
+	color:red;
+}
+.changeColor{
+	background-image: linear-gradient(to bottom,white , #def0f5);
+}
