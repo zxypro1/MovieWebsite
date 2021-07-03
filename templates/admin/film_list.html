@@ -1,0 +1,146 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'h-ui/css/H-ui.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'h-ui.admin/css/H-ui.admin.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/Hui-iconfont/1.0.8/iconfont.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'h-ui.admin/skin/default/skin.css' %}" id="skin" />
+    <link rel="stylesheet" type="text/css" href="{% static 'h-ui.admin/css/style.css' %} "/>
+
+    <title>资讯list</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> index <span class="c-gray en">&gt;</span> moviemanage <span class="c-gray en">&gt;</span> movielist <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="Refresh" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+    <div class="text-c">
+        <form action="{% url 'film:film_list' %}" method="post">
+            {% csrf_token %}
+             datetime：
+            <input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;"  value="{{ start_date }}" name="start_date">
+            -
+            <input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate" style="width:120px;"  value="{{ end_date }}" name="end_date">
+
+            <input type="text" name="film_name" id="" placeholder=" movie name " style="width:250px" class="input-text" value="{{ film_name }}">
+
+            <input type="hidden" name="search" value="true">
+
+            <button class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> search movie</button>
+
+            <button class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> <a href="{% url 'film:film_list' %}" style="color: white">all movie</a></button>
+        </form>
+    </div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l">
+            <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> batch  del</a>
+            <a class="btn btn-primary radius" data-title="add movie" data-href="{% url 'film:film_add' %}" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> add movie</a>
+        </span>
+        <span class="r">data num：<strong>{% if film_list.count %}
+        {{ film_list.count }}
+            {% else %}
+            {{ film_list.object_list.count }}
+        {% endif %}</strong> </span>
+    </div>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+
+            <thead>
+
+            <tr class="text-c">
+                <th width="25"><input type="checkbox" name="" value=""></th>
+                <th width="80">movie name </th>
+                <th width="80">  director </th>
+                <th width="80">movie   starring</th>
+                <th width="120">movie introduction </th>
+                <th width="80">movie class </th>
+                <th width="80">movie source </th>
+                <th width="80"> Release time </th>
+                <th width="80">movieticket  price</th>
+                <th width="80">  status</th>
+                <th width="80">  operation</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+            {% if film_list.object_list.count %}
+            {% for film in film_list.object_list %}
+
+                    <tr class="text-c">
+                        <td><input type="checkbox" value="" name=""></td>
+                        <td><a href="{% url 'film:film_detail' %}?film_id={{ film.id }}">{{ film.film_name }}</a></td>
+                        <td>{{ film.director }}</td>
+                        <td>{{ film.actor|truncatechars:12 }}</td>
+                        <td>{{ film.film_info|truncatechars:20 }}</td>
+                        <th>{{ film.movie_cate|truncatechars:12 }}</th>
+                        <td>{{ film.country }}</td>
+                        <td>{{ film.file_date|date:'Y-m-d' }}</td>
+                        <td>{{ film.price }}</td>
+                        <td class="td-status">
+                        {% if film.film_status == 1 %}
+                            <span class="label label-success radius">Is released</span>
+                        {% elif film.film_status == 2 %}
+                            <span class="label label-default radius">已经下架</span>
+                        {% else %}
+                            <span class="label label-warning radius">  not released</span>
+                        {% endif %}</td>
+                        <td class="f-14 td-manage">
+                            <a style="text-decoration:none" onClick="article_stop(this,'10001')" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>
+                            <a style="text-decoration:none" class="ml-5" href="{% url 'film:film_change' %}?film_id={{ film.id }}" title='   Modifymovie'><i class="Hui-iconfont">&#xe6df;</i></a>
+                            <a style="text-decoration:none" class="ml-5" onclick="film_del(this,'{{ film.id }}')" title="delmovie"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+                    </tr>
+                {% endfor %}
+
+            {% else %}
+                <tr>
+                    <td colspan="11">暂时没有数据,请 administrator后天add 数据</td>
+                </tr>
+            {% endif %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'lib/jquery/1.9.1/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/layer/2.4/layer.js' %}"></script>
+<script type="text/javascript" src="{% static 'h-ui/js/H-ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'h-ui.admin/js/H-ui.admin.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/jquery.contextmenu/jquery.contextmenu.r2.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/My97DatePicker/4.8/WdatePicker.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/datatables/1.10.0/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/laypage/1.2/laypage.js' %}"></script>
+
+<script type="text/javascript">
+    function film_del(obj,id){
+	layer.confirm('   Confirm',function(index){
+		$.ajax({
+			type: 'GET',
+			url: '{% url "film:film_delete" %}?film_id='+id,
+			dataType: 'json',
+			success: function(data){
+			    if(data.status == 1){
+			        $(obj).parents("tr").remove();
+				    layer.msg(data.msg,{icon:1,time:1},function(){
+				        location.reload()
+                    });
+                }else{
+			        layer.msg(data.msg,{icon:6,time:1000});
+                }
+
+			},
+			error:function(data) {
+				console.log(data.msg);
+			}
+		});
+	});
+}
+</script>
+</body>
+</html>

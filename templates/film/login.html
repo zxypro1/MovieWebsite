@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'swiper/swiper.min.css' %}">
+    <link rel="stylesheet" href="{% static 'film/css/jigsaw.css' %}">
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        body{
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .scroll{
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            position: absolute;
+        }
+
+        .swiper-wrapper{
+            width: 100%;
+            height: 100%;
+        }
+
+        .photo{
+            width: 1920px;
+            height: 980px;
+            -webkit-background-size:cover;
+            background-size:cover;
+        }
+
+        .login{
+            left: 50% ;
+            top: 50% ;
+            width: 500px;
+            height: 700px;
+            margin: -300px 0 0 -250px;
+            position: absolute;
+            z-index: 2;
+            border-radius: 20px;
+        }
+
+        .dowebok {
+            position: absolute;
+            left: 50%; top: 50%;
+            width: 500px;
+            height: 700px;
+            margin: -350px 0 0 -250px;
+            border: 1px solid #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(255,255,255,.5);
+        }
+        .logo {
+            width: 104px;
+            height: 104px;
+            margin: 30px auto 30px;
+            background: url(../../static/img/login/login.png) 0 0 no-repeat;
+        }
+        .form-item {
+            position: relative;
+            width: 350px;
+            margin: 0 auto;
+            padding-bottom: 30px;
+        }
+
+        .form-item input {
+            width: 288px;
+            height: 48px;
+            padding-left: 70px;
+            border: 1px solid #fff;
+            border-radius: 25px;
+            font-size: 18px;
+            color: #fff;
+            background-color: transparent;
+            outline: none;
+        }
+
+        .form-item #button {
+            padding: 0;
+            width: 200px;
+            height: 50px;
+            border: 0;
+            margin: 0 auto;
+            text-align: center;
+            border-radius: 25px;
+            font-size: 18px;
+            color: #1f6f4a;
+            outline: none;
+            cursor: pointer;
+            background-color: #fff;
+        }
+
+        #button{
+            display: block;
+            margin:0 auto 0;
+        }
+
+        #username {
+            background: url(../../static/img/login/emil.png) 20px 14px no-repeat;
+
+        }
+
+        #password {
+            background: url(../../static/img/login/password.png) 23px 11px no-repeat;
+        }
+
+        .reg-bar {
+            width: 360px;
+            margin: 0 auto 0;
+            font-size: 17px;
+            overflow: hidden;
+        }
+
+        .reg-bar a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .reg-bar a:hover {
+            text-decoration: underline;
+        }
+
+        .reg-bar .reg {
+            margin: 0;
+            float: left;
+            color: white;
+        }
+
+        .reg-bar .forget {
+            margin:0;
+            float: right;
+            color: white;
+        }
+
+        .dowebok ::-webkit-input-placeholder {
+            font-size: 18px;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        .dowebok :-moz-placeholder {
+            font-size: 18px;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        .dowebok ::-moz-placeholder {
+            font-size: 18px;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        .dowebok :-ms-input-placeholder {
+            font-size: 18px;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        @media screen and (max-width: 500px) {
+            * { box-sizing: border-box; }
+            .dowebok { position: static; width: auto; height: auto; margin: 0 30px; border: 0; border-radius: 0; }
+            .logo { margin: 50px auto; }
+            .form-item { width: auto; }
+            .form-item input, .form-item button, .reg-bar { width: 100%; }
+        }
+        #msg {
+            width: 100%;
+            line-height: 40px;
+            font-size: 17px;
+            text-align: center;
+            color: white;
+        }
+
+        a:link,a:visited,a:hover,a:active {
+            margin-left: 100px;
+            color: #0366D6;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="scroll" style="height: 100%;width: 100%">
+    <div class="scroll_autoplay fl">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+{#                {% for hot_movie in hot_movie_list %}#}
+{#                        <div class="swiper-slide">#}
+{#                            <img src="{% url 'media' hot_movie.poster %}" alt="No Picture" class="photo">#}
+{#                            <p style="position: absolute; bottom: 15px; left: 5px; font-size: xxx-large; font-family: Microsoft Yahei,serif; color: white; background-color: rgba(0,0,1,0.5)">{{ hot_movie.film_name }}</p>#}
+{#                        </div>#}
+{#                {% endfor %}#}
+
+                <div class="swiper-slide"><img src="{% static 'img/login/1.jpg' %}" alt="图片找不到了,嘤嘤嘤~~~" class="photo"></div>
+
+                <div class="swiper-slide"><img src="{% static 'img/login/2.jpg' %}" alt="图片找不到了,嘤嘤嘤~~~" class="photo"></div>
+
+                <div class="swiper-slide"><img src="{% static 'img/login/3.jpg' %}" alt="图片找不到了,嘤嘤嘤~~~" class="photo"></div>
+
+                <div class="swiper-slide"><img src="{% static 'img/login/4.jpg' %}" alt="图片找不到了,嘤嘤嘤~~~" class="photo"></div>
+
+                <div class="swiper-slide"><img src="{% static 'img/login/5.jpg' %}" alt="图片找不到了,嘤嘤嘤~~~" class="photo"></div>
+
+                <div class="swiper-slide"><img src="{% static 'img/login/6.jpg' %}" alt="图片找不到了,嘤嘤嘤~~~" class="photo"></div>
+
+            </div>
+
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</div>
+
+<div class="login">
+    <div class="dowebok">
+        <div class="logo">
+{#            <audio loop autoplay class="song"><source src ="{% static 'music/Skylar Grey - Words.mp3' %}" type = "audio/mpeg"></audio>#}
+        </div>
+        <form action="{% url 'film:login_check' %}" method="post">
+            {% csrf_token %}
+
+            <div class="form-item">
+                <input id="username" type="text" autocomplete="off" placeholder="username" name="username" required>
+            </div>
+            <div class="form-item">
+                <input id="password" type="password" autocomplete="off" placeholder="password" name="password" required>
+            </div>
+            <div class="form-item" style="margin-bottom: 0;padding-bottom: 10px;">
+                <div id="captcha" style="position: relative"></div>
+                <div id="msg"></div>
+            </div>
+
+            <div class="form-item denglu">
+                <input type="submit" value="Sign in" id="button">
+            </div>
+
+            <div class="reg-bar">
+                <a class="reg" href="{% url 'film:login_forget_pwd' %}">Forget password</a>
+                <a class="forget" href="{% url 'film:login_register_user' %}">Sign up</a>
+            </div>
+
+        </form>
+
+
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
+<script src="{% static 'JQuery.js' %}"></script>
+<script src="{% static 'swiper/swiper.js' %}"></script>
+<script src="{% static 'film/js/jigsaw.js' %}"></script>
+
+<script>
+    //发布消息隐藏或展示
+    $('.fbxx').click(function(){
+        $('.nav_side').toggle()
+    });
+
+    var swiper = new Swiper('.swiper-container', {
+
+        spaceBetween: 0,
+        centeredSlides: true,
+        autoplay:true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        }
+    });
+
+    var status = 0;
+    jigsaw.init(document.getElementById('captcha'), function () {
+        document.getElementById('msg').innerHTML = 'success';
+        status=1;
+
+    });
+
+    $('form').submit(function(e){
+        if(!$('#username').val()){
+            alert('username not is null');
+            $('#username').focus();
+            return false;
+        }
+
+        if(!$('#password').val()){
+            alert('password not is null');
+            $('#password').focus();
+            return false;
+        }
+
+        if(status != 1){
+            alert('fail');
+            return false;
+        }
+
+    });
+    //点击空格控制背景音乐播放
+    var music=$(".song")[0];
+    $(document).keydown(function(e){
+	switch(e.keyCode){
+		case 32:
+			if(!music.paused){
+			music.pause();
+
+		}else{
+			music.play();
+
+		}
+		break;
+		default:
+		break;
+	}
+});
+
+
+
+
+</script>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forget password?</title>
+
+    {% load static %}
+    <style>
+        form{
+            width: 500px;
+
+            margin:100px auto 0;
+        }
+        td>input{
+            width: 380px;
+            height: 35px;
+            background: lightyellow;
+            border:2px solid gainsboro;
+        }
+        tr{
+            width: 500px;
+            height: 65px;
+
+        }
+        th{
+            width: 120px;
+            height: 40px;
+        }
+        .change{
+            width: 100px;
+            height:40px;
+            background: lightyellow;
+            border:2px solid lightgray;
+
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+    <form action="{% url 'film:login_forget_pwd_check' %}" method="post">
+
+        {% csrf_token %}
+        <table>
+
+            <tr>
+                <th>user name:</th>
+                <td><input type="text" placeholder="请输入您的账号" class = 'username' name = "username"></td>
+            </tr>
+
+            <tr>
+                <th>email address:</th>
+                <td><input type="text" placeholder="请输入您账户绑定的邮箱地址" style="width: 200px;" class = 'user_email' name = "user_email"><span style="width: 150px;height: 40px;font-size: 20px;display: inline-block;line-height: 40px;text-align: center;background:lightgoldenrodyellow;color: grey;margin-left:26px;" class="send">点击发送验证码</span></td>
+            </tr>
+
+            <tr>
+                <th>verification code:</th>
+                <td><input type="text" placeholder="请输入邮箱验证码" class="yz" name="yz"><li style="display: none" class="email_yzm"></li></td>
+            </tr>
+
+            <tr>
+                <th>new password:</th>
+                <td><input type="password" placeholder="请输入新密码" class="password" name="password"></td>
+            </tr>
+
+            <tr>
+                <th>confirm password:</th>
+                <td><input type="password" placeholder="请再次输入密码" class="repassword" name="repassword"></td>
+            </tr>
+
+
+        </table>
+
+        <input type="submit" value="Change" class="change sure" style="float: left ;border-radius: 10px;text-align: center;font-size: 20px">
+        <span class="change" style="float: right;border-radius: 10px;font-size: 20px;text-align: center;line-height: 40px"><a href="{% url 'film:login' %}" style="color: black;text-decoration:none">取&nbsp;&nbsp;消</a></span>
+
+    </form>
+
+</body>
+</html>
+
+<script src="{% static 'JQuery.js' %}"></script>
+<script>
+
+    $('.send').click(function(){
+        user_email = $('.user_email').val();
+        console.log(user_email)
+        url = "{% url 'film:yzm' %}?email="+user_email;
+        $.ajax({
+                url:url,
+                success:function(data){
+                    if(data.status == '1'){
+                        alert(data.code);
+                        $('.email_yzm').val(data.yzm);
+{#                        alert($('.email_yzm').val())#}
+                    }else{
+                        alert(data.msg)
+                    }
+                }
+            })
+    });
+
+    $('.sure').click(function(){
+        if(!$('.username').val()){
+            alert('No user name!!!');
+            $('#username').focus();
+            return false;
+        }
+
+        if(!$('.user_email').val()){
+            alert('No user email!!!');
+            $('#user_email').focus();
+            return false;
+        }
+        if(!$('.yz').val()){
+            alert('验证码不能为空!!!');
+            $('#.yz').focus();
+            return false;
+        }
+        if($('.yz').val() != $('.email_yzm').val()){
+            alert('验证码错误!!!');
+            $('.yz').focus();
+            return false;
+
+        }
+        if(!$('.password').val()){
+            alert('新密码不能为空!!!');
+            $('.password').focus();
+            return false;
+        }
+        if(!$('.repassword').val()){
+            alert('确认密码不能为空!!!');
+            $('.repassword').focus();
+            return false;
+        }
+        if($('.repassword').val() != $('.repassword').val()){
+            alert('两次输入密码不同,请重新输入!!!');
+            $('.repassword').val('');
+            $('.repassword').focus();
+            return false;
+        }
+
+    })
+</script>

@@ -1,0 +1,790 @@
+﻿<!DOCTYPE html>
+<head>
+    <title>XDDb-电影订票系统</title>
+    <meta charset="utf-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'film/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'swiper/swiper.min.css' %}">
+    <style>
+        body{
+            background: black;
+        }
+        .header{
+            top:0;
+            left: 0;
+            margin:0;
+            padding: 0;
+            width: 100%;
+            height: 50px;
+            background: rgba(1,1,1,.9);
+            z-index: 99;
+            position:fixed;
+        }
+        .header-inner{
+            height: 50px;
+            margin-left:150px;
+            width: 250px;
+            margin-top: 0;
+        }
+        .s_title{
+            color: orangered;
+            font-size: 20px;
+            line-height: 50px;
+            width: 300px;
+        }
+
+        .custom-btn {
+	  width: 10%;
+	  height: 10%;
+	  border-radius: 5px;
+	  padding: 10px 25px;
+	  font-family: 'Lato', sans-serif;
+	  font-weight: 500;
+	  background: transparent;
+	  cursor: pointer;
+	  transition: all 0.3s ease;
+	  position: relative;
+	  display: inline-block;
+	   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+	   7px 7px 20px 0px rgba(0,0,0,.1),
+	   4px 4px 5px 0px rgba(0,0,0,.1);
+	  outline: none;
+	  text-align: center;
+	  margin: auto;
+	}
+    .btn-1 {
+	  background: orangered;
+	  background: linear-gradient(0deg, orange 0%, orangered 100%);
+	  border: none;
+	}
+        .user_info{
+            margin-right:100px;
+            width: 200px;
+            height: 50px;
+
+        }
+        .nav{
+            top: 0;
+            width: 600px;
+            height: 50px;
+            margin-left:40px;
+        }
+        .navbar li{
+            margin-left:80px;
+            font-size: 20px;
+            color: white;
+        }
+        .navbar li a{
+            color: white;
+            line-height: 50px;
+        }
+        .user_info{
+            margin-right:110px;
+            height: 50px;
+            width: 300px;
+        }
+        .user_info li{
+            color: white;
+            font-size: 20px;
+            line-height: 50px;
+            margin-left:20px;
+        }
+        .user_info li a{
+            color: white;
+            font-size: 20px;
+            line-height: 50px;
+        }
+        .user_photo{
+            width:150px;
+            height: 28px;
+
+        }
+
+        .user_photo .personal_photo{
+            width:28px;
+            height: 28px;
+            border-radius: 50%;
+            margin-top:10px;
+            border:1px solid white;
+        }
+
+        .personal_photo a img{
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+
+        }
+        .user_photo .login_out{
+            width: 100px;
+            margin-left:10px;
+
+
+        }
+
+        .search{
+            height: 30px;
+            width: 320px;
+            background: white;
+            top: 0;
+            margin-left:150px;
+            margin-top:10px;
+            border-radius:8px;
+            overflow: hidden;
+        }
+        .input input{
+            width: 266px;
+            height: 26px;
+        }
+        .input_sure input{
+            width: 50px;
+            height: 30px;
+        }
+
+
+        .card {
+            {#padding: 10px;#}
+            width: 300px;
+            height: 180px;
+            background-color: black;
+            border: none;
+            border-radius: 6px;
+            -webkit-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+            transition: all 250ms cubic-bezier(.02, .01, .47, 1);
+          }
+
+          .card:hover {
+            box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.15);
+            transform: translate(0,-5px);
+            transition-delay: 0s !important;
+          }
+
+          .box-shadow {
+            -webkit-box-shadow: 0 0.25rem 1rem rgba(48, 55, 66, 0.15);
+            box-shadow: 0 4px 16px rgba(48, 55, 66, 0.15);
+          }
+
+          /* 非核心样式 */
+          .card-header {
+            text-align: center;
+          }
+
+          .card-body, .card-footer {
+            text-align: left;
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .top{
+            width: 1200px;
+            background: wheat;
+            height: 450px;
+            margin:60px auto 0;
+
+        }
+
+        .scroll{
+            width: 800px;
+            height: 450px;
+        }
+        .swiper-slide img{
+            width: 800px;
+            height: 450px;
+            display: table-cell;
+            vertical-align:middle;
+        }
+
+        .swiper-wrapper{
+            width: 800px;
+            height: 450px;
+        }
+
+        .top_top{
+            width: 400px;
+            height: 225px;
+            background: rosybrown;
+        }
+        .top_top a img{
+            width: 400px;
+            height: 225px;
+
+        }
+
+        .top_down{
+            width: 400px;
+            height: 225px;
+            background: powderblue;
+        }
+        .top_down a img{
+            width: 400px;
+            height: 225px;
+        }
+
+
+        .main{
+            width: 1200px;
+            margin:0 auto 0;
+            background: black;
+        }
+
+        .more{
+            width: 100%;
+            margin: 50px auto 0;
+            height: 600px;
+        }
+
+        .hot_left{
+            width: 100%;
+            height: 600px;
+            margin-left:0;
+        }
+
+
+        .hot_nav{
+            height: 50px;
+            width: 880px;
+        }
+        .hot_nav>li:nth-child(1){
+            color:orangered;
+            font-size: 24px;
+            line-height:50px;
+            margin-left: 10px;
+        }
+
+        .hot_nav>li:nth-child(2){
+            color:orangered;
+            font-size: 16px;
+            line-height:30px;
+            margin-top:20px;
+
+        }
+
+        .more .hot_movie li{
+            width: 210px;
+            height: 260px;
+            margin-left:10px;
+            margin-right:10px;
+            margin-bottom:20px;
+            margin-top:5px;
+        }
+        .hot_movie>li:nth-child(1){
+            margin-left:0;
+        }
+        .hot_movie>li:nth-child(6){
+            margin-left:0;
+        }
+        .hot_movie>li:nth-child(5){
+            margin-right:0;
+        }
+        .hot_movie>li:nth-child(10){
+            margin-right:0;
+        }
+
+
+        .movie_detail{
+            width: 160px;
+            height: 220px;
+        }
+        .movie_detail img{
+            width: 160px;
+            height: 220px;
+        }
+        .buy_movie{
+            width: 158px;
+            height: 39px;
+            background: black;
+            color: darkorange;
+            line-height: 40px;
+            font-size: 14px;
+            text-align: center;
+            {#border-bottom: 1px solid gainsboro;#}
+            {#border-left: 1px solid gainsboro;#}
+            {#border-right: 1px solid gainsboro;#}
+            overflow: auto;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        .hot_movie::-webkit-scrollbar {/*滚动条整体样式*/
+
+        width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+
+        height: 1px;
+
+        }
+
+        .hot_movie::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+
+                border-radius: 10px;
+
+                 -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+
+                background: #1f1f1f;
+
+        }
+
+        .hot_movie::-webkit-scrollbar-track {/*滚动条里面轨道*/
+
+                -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+
+                border-radius: 10px;
+
+                background: #5a5a5a;
+
+        }
+
+
+        .hot_right{
+            width: 300px;
+            height: 600px;
+            margin-left:0;
+        {#            background: silver;#}
+        }
+        .hot_right ul{
+            margin-bottom:10px;
+        }
+
+
+        .hot_right_title{
+            height: 50px;
+            width: 300px;
+        {#            background: lightgreen;#}
+        }
+
+        .hot_right_title li:nth-child(1){
+            font-size: 26px;
+            line-height: 50px;
+            margin-left:10px;
+            color: orangered;
+        }
+        .hot_right_win{
+            width: 298px;
+            height: 80px;
+            border: 1px solid lightgray;
+        }
+        .hot_right_win>li>img{
+            width: 120px;
+            height: 80px;
+        }
+        .hot_right_win_name{
+            color:black;
+            font-size: 18px;
+            margin-top:5px;
+            margin-left:130px;
+        }
+        .hot_right_win_count{
+            color:orangered;
+            font-size: 15px;
+            margin-top:25px;
+            margin-left:130px;
+        }
+        .hot_right_movie{
+            width: 300px;
+            height: 40px;
+        {#            background: powderblue;#}
+            font-size: 16px;
+            line-height: 40px;
+        }
+        .movie_num{
+            margin-left:5px;
+        }
+        .movie_name{
+            margin-left:20px;
+        }
+        .movie_box_office{
+            margin-right:5px;
+        }
+
+
+
+        .free {
+        width: 100%;
+        height: 180px;
+        margin-top: 35px;
+        margin-bottom: 0;
+        background: #12161c;
+        position: absolute;
+      }
+
+      .free > div {
+        width: 210px;
+        height: 110px;
+        border-left: 1px solid #212833;
+        margin-top: 35px;
+
+      }
+
+      .free > div:nth-child(1) {
+        margin-left: 10%;
+        border: none;
+      }
+        .free div p{
+            margin-left:74px;
+        }
+        .free div p:nth-child(1){
+            margin-top:13px;
+        }
+
+        .free div p a{
+            color:#808080;
+            font-size: 13px;
+            line-height: 24px;
+        }
+        .free div p:nth-child(1) a{
+            margin-top:13px;
+        }
+        .free div p a:hover{
+            color:white;
+        }
+
+
+
+    </style>
+</head>
+
+<html>
+<body>
+
+<div class="header">
+    <div class="header-inner fl">
+        <div class="s_title"><a class="s_title" href="{% url 'film:index' %}">XDDb</a></div>
+    </div>
+
+    <div class="nav fl">
+        <ul class="navbar">
+            <li class="fl"><a href="{% url 'film:index' %}" style="color:orangered;" class="first_page">Home</a></li>
+            <li class="fl"><a href="{% url 'film:movie' %}">Movies</a></li>
+            {#            <li class="fl"><a href="">影院</a></li>#}
+{#            <li class="fl"><a href="{% url 'film:movie_ranking' %}">榜单</a></li>#}
+            <li class="fl"><a href="{% url 'film:mail' %}">Malls</a></li>
+            <li class="fl"><a href="{% url 'film:order' %}">Orders</a></li>
+        </ul>
+    </div>
+        <div class="user_info fr">
+
+        {% if user.is_active %}
+            <ul>
+                <li class="fl"><a href="{% url 'film:index_user_detail' %}">{{ user.username }}</a></li>
+                <li class="fl user_photo">
+                    <span class="personal_photo fl"><a href="{% url 'film:index_user_detail' %}"><img src="{% static 'img/default.jpg' %}" alt=""></a></span>
+                    <span class="login_out fl" style="display: none"><a href="{% url 'film:login_out' %}?action=logout" class="fl">Sign out</a></span>
+                </li>
+            </ul>
+        {% else %}
+            <ul>
+                <li class="fl"><a href="{% url 'film:login' %}">Sign in</a></li>
+                <li class="fl">|</li>
+                <li class="fl"><a href="{% url 'film:login_register_user' %}">Sign up</a></li>
+            </ul>
+        {% endif %}
+    </div>
+{#    <div class="search fl">#}
+{#        <form action="" method="post">#}
+{#            {% csrf_token %}#}
+{#            <ul>#}
+{#                <li class="input fl"><input type="text" placeholder="请输入你想看的movie"></li>#}
+{#                <li class="input_sure fl"><input type="submit" value="搜索"></li>#}
+{#            </ul>#}
+{#        </form>#}
+{##}
+{#    </div>#}
+
+
+</div>
+
+<div class="top">
+
+    <div class="scroll fl">
+        <div class="scroll_autoplay fl">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+
+                    {% for hot_movie in hot_movie_list %}
+                        <div class="swiper-slide">
+                            <a href="{% url 'film:user_movie_detail' %}?movie_id={{ hot_movie.id }}">
+                                <img src="{% url 'media' hot_movie.poster %}" alt="No Picture" class="photo">
+                            </a>
+                            <p style="position: absolute; bottom: 15px; left: 5px; font-size: xxx-large; font-family: Microsoft Yahei,serif; color: white; background-color: rgba(0,0,1,0.5)">{{ hot_movie.film_name }}</p>
+                        </div>
+                    {% endfor %}
+
+{#                    <div class="swiper-slide"><a href=""><img src="{% static 'img/login/1.jpg' %}" alt="图片找不到了,嘤嘤嘤~~~" class="photo"></a></div>#}
+
+{#                    <div class="swiper-slide"><a href=""><img src="{% static 'img/login/2.jpg' %}" alt="图片找不到了,嘤嘤嘤~~~" class="photo"></a></div>#}
+
+{#                    <div class="swiper-slide"><a href=""><img src="{% static 'img/login/3.jpg' %}" alt="图片找不到了,嘤嘤嘤~~~" class="photo"></a></div>#}
+
+{#                    <div class="swiper-slide"><a href=""><img src="{% static 'img/login/4.jpg' %}" alt="图片找不到了,嘤嘤嘤~~~" class="photo"></a></div>#}
+{##}
+{#                    <div class="swiper-slide"><a href=""><img src="{% static 'img/login/6.jpg' %}" alt="图片找不到了,嘤嘤嘤~~~" class="photo"></a></div>#}
+
+
+                </div>
+                <div class="swiper-pagination"></div>
+
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fr top_top">
+        <a href="{% url 'film:mail' %}"><img src="{% static 'img/login/popcon.jpg' %}" alt="图片找不到了,嘤嘤嘤~~~" class="photo"></a>
+    </div>
+    <div class="fr top_down"><a><img src="{% static 'img/login/disease.jpg' %}" alt="图片找不到了,嘤嘤嘤~~~" class="photo"></a></div>
+
+</div>
+
+<div class="main">
+
+    <div class="more">
+        <div class="hot_left fl">
+            <ul class="hot_nav">
+                <li class="fl">Released</li>
+            </ul>
+            <ul class="hot_movie" style="height: 500px; overflow:scroll; overflow-x:hidden">
+                {% for hot_movie in hot_movie_list %}
+                    <li class="fl card box-shadow">
+                        <div class="movie_detail">
+                            <a href="{% url 'film:user_movie_detail' %}?movie_id={{ hot_movie.id }}">
+                                <img src="{% url 'media' hot_movie.poster %}" alt="">
+                            </a>
+
+                        </div>
+                        <a href="{% url 'film:index_choice_movie_time' %}?movie_id={{ hot_movie.id }}"><div class="buy_movie buy_hot_movie">{{ hot_movie.film_name }}</div></a>
+                    </li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+{#        <div class="hot_right fr">#}
+{#            <ul class="hot_right_title">#}
+{#                <li>今日票房</li>#}
+{#            </ul>#}
+{#            <a href="">#}
+{#                <ul class="hot_right_win">#}
+{##}
+{#                    <li class="fl"><img src="{% static 'img/login/3.jpg' %}" alt=""></li>#}
+{#                    <li class="hot_right_win_name">白蛇:缘起</li>#}
+{#                    <li class="hot_right_win_count">3994.14万</li>#}
+{#                </ul></a>#}
+{#            <ul class="hot_right_movie_list">#}
+{#                {% for hot_movie in hot_movie_list %}#}
+{#                    <a href="{% url 'film:user_movie_detail' %}?movie_id={{ hot_movie.id }}"><li class="hot_right_movie"><span class="fl movie_num">2</span><p class="fl movie_name">{{ hot_movie.film_name }}</p><span class="fr movie_box_office">3994.14万</span></li></a>#}
+{#                {% endfor %}#}
+{##}
+{##}
+{##}
+{##}
+{#            </ul>#}
+{#            <ul class="hot_today_data"></ul>#}
+{##}
+{##}
+{#        </div>#}
+
+    </div>
+    <div class="more">
+        <div class="hot_left fl">
+            <ul class="hot_nav">
+                <li class="fl">Upcoming Movies</li>
+            </ul>
+            <ul class="hot_movie" style="height: 500px; overflow:scroll; overflow-x:hidden">
+                {% for after_movie in after_movie_list %}
+                    <li class="fl card box-shadow">
+                        <div class="movie_detail"><a href="{% url 'film:user_movie_detail' %}?movie_id={{ after_movie.id }}"><img src="{% url 'media' after_movie.poster %}" alt=""></a></div>
+                        <a href="/home/jerry"><div class="buy_movie buy_after_movie">{{ after_movie.film_name }}</div></a>
+                    </li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+{#        <div class="hot_right fr">#}
+{#            <ul class="hot_right_title">#}
+{#                <li>最受期待</li>#}
+{#            </ul>#}
+{#            <a href="">#}
+{#                <ul class="hot_right_win">#}
+{##}
+{#                    <li class="fl"><img src="{% static 'img/login/3.jpg' %}" alt=""></li>#}
+{#                    <li class="hot_right_win_name">飞驰人生</li>#}
+{#                    <li class="hot_right_win_count">241164人想看</li>#}
+{#                </ul></a>#}
+{#            <ul class="hot_right_movie_list">#}
+{#                {% for after_movie in after_movie_list %}#}
+{#                    <a href="{% url 'film:user_movie_detail' %}?movie_id={{ after_movie.id }}"><li class="hot_right_movie"><span class="fl movie_num">2</span><p class="fl movie_name">{{ after_movie.film_name }}</p><span class="fr movie_box_office">3994.14万</span></li></a>#}
+{#                {% endfor %}#}
+{##}
+{##}
+{##}
+{##}
+{#            </ul>#}
+{#            <ul class="hot_today_data"></ul>#}
+{##}
+{##}
+{#        </div>#}
+
+    </div>
+{#    <div class="more">#}
+{#        <div class="hot_left fl">#}
+{#            <ul class="hot_nav">#}
+{#                <li class="fl">Hot Movies</li>#}
+{#            </ul>#}
+{#            <ul class="hot_movie" style="height: 500px; overflow:scroll; overflow-x:hidden">#}
+{#                {% for ago_movie in ago_movie_list %}#}
+{#                    <li class="fl">#}
+{#                        <div class="movie_detail"><a href="{% url 'film:user_movie_detail' %}?movie_id={{ ago_movie.id }}"><img src="{% url 'media' ago_movie.poster %}" alt=""></a></div>#}
+{#                        <a href="{% url 'film:user_movie_detail' %}?movie_id={{ ago_movie.id }}"><div class="buy_movie buy_ago_movie">{{ ago_movie.film_name }}</div></a>#}
+{#                    </li>#}
+{#                {% endfor %}#}
+{##}
+{#            </ul>#}
+{##}
+{#        </div>#}
+{#        <div class="hot_right fr">#}
+{#            <ul class="hot_right_title">#}
+{#                <li>TOP100<span class="all_movie fr" style="color: orangered;font-size: 16px;line-height: 50px">查看完整榜单>></span></li>#}
+{#            </ul>#}
+{#            <a href="">#}
+{#                <ul class="hot_right_win">#}
+{#                    <li class="fl"><img src="{% static 'img/login/3.jpg' %}" alt=""></li>#}
+{#                    <li class="hot_right_win_name">白蛇:缘起</li>#}
+{#                    <li class="hot_right_win_count">3994.14万</li>#}
+{#                </ul>#}
+{#            </a>#}
+{#            <ul class="hot_right_movie_list">#}
+{#                {% for ago_movie in ago_movie_list %}#}
+{#                    <a href="{% url 'film:user_movie_detail' %}?movie_id={{ ago_movie.id }}"><li class="hot_right_movie"><span class="fl movie_num">2</span><p class="fl movie_name">{{ ago_movie.film_name }}</p><span class="fr movie_box_office">3994.14万</span></li></a>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#            <ul class="hot_today_data"></ul>#}
+{##}
+{##}
+{#        </div>#}
+
+    </div>
+</div>
+
+<div class="free fl clearF">
+    <div class="one fl">
+        <p><a href="">about us</a></p>
+        <p><a href="">Authority cooperation</a></p>
+        <p><a href="">Cooperation zone</a></p>
+        <p><a href="">Join us</a></p>
+    </div>
+    <div class="two fl">
+        <p><a href="">Shopping guide</a></p>
+        <p><a href="">buying process</a></p>
+        <p><a href="">Method of pay</a></p>
+        <p><a href=""> shipping process</a></p>
+    </div>
+    <div class="stree fl">
+        <p><a href="">After-sales</a></p>
+        <p><a href="">return process</a></p>
+        <p><a href="">deal with after</a></p>
+        <p><a href="">7 days</a></p>
+    </div>
+    <div class="fore fl">
+        <p><a href="">Help center</a></p>
+        <p><a href=""> registration process</a></p>
+        <p><a href="">Contact customer</a></p>
+        <p><a href="">Site map</a></p>
+    </div>
+    <div class="five fl">
+        <p><a href="">terms of service</a></p>
+        <p><a href="">maintenance</a></p>
+        <p><a href="">registration</a></p>
+        <p><a href="">Privacy statement </a></p>
+    </div>
+
+</div>
+
+</body>
+</html>
+<script src="{% static 'JQuery.js' %}"></script>
+<script src="{% static 'swiper/swiper.js' %}"></script>
+
+<script>
+    var swiper = new Swiper('.swiper-container', {
+
+        spaceBetween: 0,
+        centeredSlides: true,
+        autoplay:true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        }
+    });
+
+    $('.user_photo').mouseover(function(){
+        $('.login_out').show()
+    }).mouseleave(function(){
+        $('.login_out').hide()
+    });
+
+    var movie_name;
+    $('.buy_hot_movie').mouseover(function(){
+        movie_name = $(this).html();
+        $(this).css('background','orangered');
+        $(this).css('color','white');
+        $(this).html('Click on the ticket');
+    }).mouseleave(function(){
+        $(this).css('background','black');
+        $(this).css('color','darkorange');
+        $(this).html(movie_name)
+    });
+    $('.buy_after_movie').mouseover(function(){
+        movie_name = $(this).html();
+        $(this).css('background','orangered');
+        $(this).css('color','white');
+        $(this).html('点击预约');
+    }).mouseleave(function(){
+        $(this).css('background','blackF');
+        $(this).css('color','darkorange');
+        $(this).html(movie_name)
+    });
+
+    $('.buy_ago_movie').mouseover(function(){
+        movie_name = $(this).html();
+        $(this).css('background','orangered');
+        $(this).css('color','white');
+        $(this).html('check the details');
+    }).mouseleave(function(){
+        $(this).css('background','black');
+        $(this).css('color','darkorange');
+        $(this).html(movie_name)
+    });
+
+
+    $('.navbar li').mouseover(function(){
+        $(this).children().css('color','#FF7F50')
+    }).mouseleave(function(){
+        $(this).children().css('color','white');
+        $('.first_page').css('color','orangered')
+
+    });
+    $('.hot_right_movie_list a li').mouseover(function(){
+        $(this).css('background','#FF7F50');
+        $(this).css('color','white');
+    }).mouseleave(function(){
+        $(this).css('background','white');
+        $(this).css('color','black');
+    })
+
+</script>

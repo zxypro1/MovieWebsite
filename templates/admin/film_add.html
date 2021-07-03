@@ -1,0 +1,185 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="Bookmark" href="/favicon.ico" >
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'h-ui/css/H-ui.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'h-ui.admin/css/H-ui.admin.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/Hui-iconfont/1.0.8/iconfont.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'h-ui.admin/skin/default/skin.css' %}" id="skin" />
+    <link rel="stylesheet" type="text/css" href="{% static 'h-ui.admin/css/style.css' %} "/>
+
+    <title>新增movie - movieticketmanage</title>
+
+</head>
+<body>
+
+
+<article class="page-container">
+    <form class="form form-horizontal" id="form-article-add" action="{% url 'film:film_add_check' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>movie name ：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="   movie name " id="film_name" name="film_name" nullmsg="movie name 不能为空！" required>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">movie  director ：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="   movie  director " id="director" name="director" nullmsg="movie  director 不能为空！" required>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">  The main actor：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="   movie  The main actor" id="actor" name="actor"  nullmsg="movie   starring不能为空！" required>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">movie source   ：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="country" name="country"  nullmsg="movie source 不能为空！" required>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">movieticket  price ：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="price" name="price"  nullmsg="movie  price 不能为空！" required>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">movie  class ：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="movie_cate" name="movie_cate"  nullmsg="movie  class 不能为空！" required>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">movie details：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <textarea name="film_info" id="film_info" cols="" rows="" class="textarea"  placeholder="   ...   Enter a minimum of 10 characters" datatype="*10-500" dragonfly="true" nullmsg="movie introduction 不能为空！" onKeyUp="$.Huitextarealength(this,500)" required></textarea>
+                <p class="textarea-numberbar"><em class="textarea-length">0</em>/500</p>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">movie  poster：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="file" name="poster" id="poster" required>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">确定登入：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="check-box">
+                    <input type="checkbox" id="" name="film_status" value="1" required/>
+                    <label for="checkbox-pinglun">&nbsp;</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">登入但还未上映：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="check-box">
+                    <input type="checkbox" id="" name="film_status" value="0"/>
+                    <label for="checkbox-pinglun">&nbsp;</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+{#                <button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i>   submmit </button>#}
+                <input type="submit" value="  submmit " class="btn btn-primary radius">
+                <button onClick="removeIframe();" class="btn btn-default radius" type="button"><a href="{% url 'film:film_list' %}">&nbsp;&nbsp;   cancel&nbsp;&nbsp;</a></button>
+            </div>
+        </div>
+
+
+    </form>
+</article>
+</body>
+</html>
+
+<script type="text/javascript" src="{% static 'lib/jquery/1.9.1/jquery.min.js' %}"></script><script type="text/javascript" src="{% static 'lib/layer/2.4/layer.js' %}"></script>
+<script type="text/javascript" src="{% static 'h-ui/js/H-ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'h-ui.admin/js/H-ui.admin.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/jquery.contextmenu/jquery.contextmenu.r2.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/My97DatePicker/4.8/WdatePicker.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/datatables/1.10.0/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/laypage/1.2/laypage.js' %}"></script>
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="{% static 'lib/jquery.validation/1.14.0/jquery.validate.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/jquery.validation/1.14.0/validate-methods.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/jquery.validation/1.14.0/messages_zh.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/webuploader/0.1.5/webuploader.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/ueditor/1.4.3/ueditor.config.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/ueditor/1.4.3/ueditor.all.min.js' %}"> </script>
+<script type="text/javascript" src="{% static 'lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js' %}"></script>
+
+<script type="text/javascript">
+    $('form').submit(function() {
+        if (!$('#film_name').val()) {
+            alert('movie name 不能为空!!!');
+            $('#film_name').focus();
+            return false;
+        }
+        if (!$('#director').val()) {
+            alert('movie  director 不能为空!!!');
+            $('#director').focus();
+            return false;
+        }
+        if (!$('#actor').val()) {
+            alert('movie   starring不能为空!!!');
+            $('#actor').focus();
+            return false;
+        }
+        if (!$('#country').val()) {
+            alert('movie source   不能为空!!!');
+            $('#country').focus();
+            return false;
+        }
+        if (!$('#price').val()) {
+            alert('movie  price 不能为空!!!');
+            $('#price').focus();
+            return false;
+        }
+        if (!$('#movie_cate').val()) {
+            alert('movie  class 不能为空!!!');
+            $('#movie_cate').focus();
+            return false;
+        }
+        if (!$('#film_info').val()) {
+            alert('movie details不能为空!!!');
+            $('#film_info').focus();
+            return false;
+        }
+        if (!$('#poster').val()) {
+            alert('movie  poster不能为空!!!');
+            $('#poster').focus();
+            return false;
+        }
+
+
+    })
+</script>
+<!--/请在上方写此页面业务相关的脚本-->

@@ -1,0 +1,311 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="Bookmark" href="/favicon.ico" >
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'h-ui/css/H-ui.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'h-ui.admin/css/H-ui.admin.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/Hui-iconfont/1.0.8/iconfont.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'h-ui.admin/skin/default/skin.css' %}" id="skin" />
+    <link rel="stylesheet" type="text/css" href="{% static 'h-ui.admin/css/style.css' %} "/>
+
+    <title>movie ticket sales system</title>
+
+</head>
+<body>
+<header class="navbar-wrapper">
+    <div class="navbar navbar-fixed-top">
+        <div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="javascript:void(0);">XD-movie</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a>
+            <span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
+            <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
+
+            <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+{#                <audio loop autoplay class="song"><source src ="{% static 'music/Skylar Grey - Words.mp3' %}" type = "audio/mpeg"></audio>#}
+
+                <ul class="cl">
+
+{#                    <li> administrator:{{ user.username }}</li>#}
+                    <li class="dropDown dropDown_hover">
+                        <a href="#" class="dropDown_A"> administrator:{{ user.username }}<i class="Hui-iconfont">&#xe6d5;</i></a>
+                        <ul class="dropDown-menu menu radius box-shadow">
+{#                            <li><a href="javascript:;" onClick="myselfinfo()">massage</a></li>#}
+                            <li><a href="{% url 'film:login_out' %}?action=logout">switch account</a></li>
+                            <li><a href="{% url 'film:login_out' %}?action=logout">sign out</a></li>
+                        </ul>
+                    </li>
+{#                    <li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>#}
+{#                    <li id="Hui-skin" class="dropDown right dropDown_hover"> <a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>#}
+{#                        <ul class="dropDown-menu menu radius box-shadow">#}
+{#                            <li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>#}
+{#                            <li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>#}
+{#                            <li><a href="javascript:;" data-val="default" title="绿色">绿色</a></li>#}
+{#                            <li><a href="javascript:;" data-val="red" title="红色">红色</a></li>#}
+{#                            <li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>#}
+{#                            <li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>#}
+{#                        </ul>#}
+{#                    </li>#}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<aside class="Hui-aside">
+    <div class="menu_dropdown bk_2">
+        {# User management模块菜单 #}
+        <dl id="menu-article">
+            <dt><i class="Hui-iconfont">&#xe616;</i>&nbsp;&nbsp;User management<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+
+                    <li><a data-href="{% url 'film:user_list' %}" data-title="view user" href="javascript:void(0)">&nbsp;&nbsp;view user</a></li>
+{#                    <li><a data-href="{% url 'film:user_add' %}" data-title="add user" href="javascript:void(0)">&nbsp;&nbsp;add user</a></li>#}
+{#                    <li><a data-href="{% url 'film:user_forbid' %}" data-title="ban user" href="javascript:void(0)">&nbsp;&nbsp;ban user</a></li>#}
+                    {# <li><a data-href="{% url 'film:user_change' %}" data-title="   Modifyuser" href="javascript:void(0)">&nbsp;&nbsp;修&nbsp;改&nbsp;用&nbsp;户&nbsp;&nbsp;</a></li>#}
+{#                    <li><a data-href="{% url 'film:user_message' %}" data-title="userlog" href="javascript:void(0)">&nbsp;&nbsp;用&nbsp;户&nbsp;日&nbsp;志&nbsp;&nbsp;</a></li>#}
+
+                </ul>
+            </dd>
+        </dl>
+        {# movieticket模块菜单 #}
+        <dl id="menu-article">
+            <dt><i class="Hui-iconfont">&#xe616;</i>Movie management<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    {# {% url 'blog:category' %} #}
+                    <li><a data-href="{% url 'film:film_list' %}" data-title="viewmovieticket" href="javascript:void(0)">view Movie</a></li>
+                    <li><a data-href="{% url 'film:film_add' %}" data-title="add movieticket" href="javascript:void(0)">add Movie&nbsp;&nbsp;</a></li>
+{#                    <li><a data-href="{% url 'film:film_list' %}" data-title="delmovieticket" href="javascript:void(0)">delete Movie&nbsp;&nbsp;</a></li>#}
+{#                    <li><a data-href="" data-title="movielog" href="javascript:void(0)">&nbsp;&nbsp;电&nbsp;影&nbsp;日&nbsp;志&nbsp;&nbsp;</a></li>#}
+
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-article">
+            <dt><i class="Hui-iconfont">&#xe616;</i>Goods management<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    {# {% url 'blog:category' %} #}
+                    <li><a data-href="{% url 'film:goods_list' %}" data-title="viewgoods" href="javascript:void(0)">view commodity</a></li>
+                    <li><a data-href="{% url 'film:goods_add' %}" data-title="add goods" href="javascript:void(0)">add commodity</a></li>
+{#                    <li><a data-href="" data-title="delgoods" href="javascript:void(0)">删除零食</a></li>#}
+{#                    <li><a data-href="" data-title="   Modifygoods" href="javascript:void(0)">修改零食</a></li>#}
+                    {% comment %} <li><a data-href="{% url 'film:transaction_Records' %}" data-title="Sales record" href="javascript:void(0)">sales record</a></li> {% endcomment %}
+
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-article">
+            <dt><i class="Hui-iconfont">&#xe616;</i>Bill management<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    {# {% url 'blog:category' %} #}
+                    <li><a data-href="{% url 'film:transaction_Records' %}" data-title="viewuser  Account" href="javascript:void(0)">View bill</a></li>
+                </ul>
+            </dd>
+        </dl>
+
+{#        <dl id="menu-article">#}
+{#            <dt><i class="Hui-iconfont">&#xe616;</i>&nbsp;&nbsp;用&nbsp;户&nbsp;评&nbsp;测&nbsp;&nbsp;<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>#}
+{#            <dd>#}
+{#                <ul>#}
+{##}
+{#                    <li><a _href="" data-title="view评测" href="javascript:void(0)">&nbsp;&nbsp;查&nbsp;看&nbsp;评&nbsp;测&nbsp;&nbsp;</a></li>#}
+{#                    <li><a _href="" data-title="评测log" href="javascript:void(0)">&nbsp;&nbsp;评&nbsp;测&nbsp;日&nbsp;志&nbsp;&nbsp;</a></li>#}
+{##}
+{#                </ul>#}
+{#            </dd>#}
+{#        </dl>#}
+
+{#        <dl id="menu-article">#}
+{#            <dt><i class="Hui-iconfont">&#xe616;</i>&nbsp;&nbsp;系&nbsp;统&nbsp;管&nbsp;理&nbsp;&nbsp;<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>#}
+{#            <dd>#}
+{#                <ul>#}
+{#                    <li><a data-href="{% url 'film:admin_list' %}" data-title="view administrator" href="javascript:void(0)">&nbsp;&nbsp;查&nbsp;看&nbsp;管&nbsp;理&nbsp;员&nbsp;&nbsp;</a></li>#}
+{#                    <li><a data-href="{% url "film:superuser_add" %}" data-title="add  administrator" href="javascript:void(0)">&nbsp;&nbsp;添&nbsp;加&nbsp;管&nbsp;理&nbsp;员&nbsp;&nbsp;</a></li>#}
+{#                    <li><a data-href="{% url 'film:admin_del' %}" data-title="注销 administrator" href="javascript:void(0)">&nbsp;&nbsp;管&nbsp;理&nbsp;员&nbsp;注&nbsp;销&nbsp;&nbsp;</a></li>#}
+{#                    <li><a data-href="{% url 'film:mask_word' %}" data-title="屏蔽字" href="javascript:void(0)">&nbsp;&nbsp;添&nbsp;加&nbsp;屏&nbsp;蔽&nbsp;字&nbsp;&nbsp;</a></li>#}
+{#                </ul>#}
+{#            </dd>#}
+{#        </dl>#}
+
+    </div>
+</aside>
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+<section class="Hui-article-box">
+    <div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
+        <div class="Hui-tabNav-wp">
+            <ul id="min_title_list" class="acrossTab cl">
+                <li class="active">
+                    <span title="desktop" data-href="{% url 'film:welcome' %}">desktop</span>
+                    <em></em></li>
+            </ul>
+        </div>
+        <div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
+    </div>
+    <div id="iframe_box" class="Hui-article">
+        <div class="show_iframe">
+            <div style="display:none" class="loading"></div>
+
+            <iframe scrolling="yes" frameborder="0" src="{% url 'film:welcome' %}"></iframe>
+        </div>
+    </div>
+</section>
+
+<div class="contextMenu" id="Huiadminmenu">
+    <ul>
+        <li id="closethis">Close the current </li>
+        <li id="closeall">Close all  </li>
+    </ul>
+</div>
+
+<script type="text/javascript" src="{% static 'JQuery.js' %}"></script>
+<script type="text/javascript" src="{% static '' %}jquery_cookie/jquery.cookie.js"></script>
+<script type="text/javascript" src="{% static '' %}h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="{% static '' %}h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="{% static '' %}lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="{% static '' %}lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
+
+<script type="text/javascript">
+
+    $(function(){
+        /*$("#min_title_list li").contextMenu('Huiadminmenu', {
+         bindings: {
+         'closethis': function(t) {
+         console.log(t);
+         if(t.find("i")){
+         t.find("i").trigger("click");
+         }
+         },
+         'closeall': function(t) {
+         alert('Trigger was '+t.id+'\nAction was Email');
+         },
+         }
+         });*/
+    });
+    /*个人   msg*/
+
+    function myselfinfo(){
+
+        layer.open({
+            type: 1,
+            area: ['300px','200px'],
+            fix: false, //不固定
+            maxmin: true,
+            shade:0.4,
+            title: 'view   msg',
+            content: '<div> administrator   msg</div>'
+        });
+
+    }
+
+    /*资讯-add */
+    function article_add(title,url){
+
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        });
+        layer.full(index);
+
+    }
+    /*  img -add */
+    function picture_add(title,url){
+
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        });
+        layer.full(index);
+
+    }
+    /*产品-add */
+    function product_add(title,url){
+
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        });
+        layer.full(index);
+
+    }
+    /*user-add */
+    function member_add(title,url,w,h){
+
+        layer_show(title,url,w,h);
+
+    }
+
+
+
+    //鼠标移动到音乐上方,显示音乐播放情况
+
+    var music = $(".song")[0];
+    $(".music").mouseover(function(){
+        if(!music.paused){
+            $(".gif").html('<img class="_37Ilx" src="data:image/gif;base64,R0lGODlhHAAcAPABAP///wAAACH5BAkeAAEAIf8LTkVUU0NBUEUyLjADAQAAACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJPjI+py+0BIngUyvrkxE3zfn2LJypkiZyooaah0x6x+SazXbsRdd/6RttlcjJiEIgTwowWZVKD/DGgzB41WnT+rNosdFq9grss8ShMXqkZBQAh+QQJHgABACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJGjI+py+0PDZggPlptw3rTznCgIo5IaUrYZ67s6E5pnMHxfLe57eL9gjrtEsEDLfQiDoUy4NKYZK6QTdJTVVX+rFlp6qspAAAh+QQJHgABACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJQjI+py+1vgAQQTlrdzXrytn1LKCZkeZxooKbe00ZvJzGxOeM1nCO333PtaBjFT1jUXZLAofIGXTqbTGR0ag3KsNulTcuSVrtfaXkc5q7WjAIAOw==" style="height:20px;width: 20px;">');
+            $(".music").html("关闭背景音乐");
+        }else{
+            $(".gif").html('<img src="">');
+            $(".music").html("打开背景音乐");
+        }
+    }).mouseleave(function(){
+        if(!music.paused){
+            $(".gif").html('<img class="_37Ilx" src="data:image/gif;base64,R0lGODlhHAAcAPABAP///wAAACH5BAkeAAEAIf8LTkVUU0NBUEUyLjADAQAAACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJPjI+py+0BIngUyvrkxE3zfn2LJypkiZyooaah0x6x+SazXbsRdd/6RttlcjJiEIgTwowWZVKD/DGgzB41WnT+rNosdFq9grss8ShMXqkZBQAh+QQJHgABACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJGjI+py+0PDZggPlptw3rTznCgIo5IaUrYZ67s6E5pnMHxfLe57eL9gjrtEsEDLfQiDoUy4NKYZK6QTdJTVVX+rFlp6qspAAAh+QQJHgABACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJQjI+py+1vgAQQTlrdzXrytn1LKCZkeZxooKbe00ZvJzGxOeM1nCO333PtaBjFT1jUXZLAofIGXTqbTGR0ag3KsNulTcuSVrtfaXkc5q7WjAIAOw==" style="height:20px;width: 20px;">');
+            $(".music").html("Skylar Grey - Words");
+        }else{
+            $(".gif").html('<img src="">');
+            $(".music").html("打开背景音乐");
+        }
+
+    });
+
+
+    //点击,控制音乐播放
+
+
+    $(".music").click(function(){
+        if(!music.paused){
+            music.pause();
+        }else{
+            music.play();
+        }
+
+    });
+
+
+
+    $(document).keydown(function(e){
+        switch(e.keyCode){
+            case 32:
+                if(!music.paused){
+                    $(".gif").html('<img src="">');
+                    $(".music").html("打开背景音乐");
+                    music.pause();
+
+                }else{
+                    $(".gif").html('<img class="_37Ilx" src="data:image/gif;base64,R0lGODlhHAAcAPABAP///wAAACH5BAkeAAEAIf8LTkVUU0NBUEUyLjADAQAAACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJPjI+py+0BIngUyvrkxE3zfn2LJypkiZyooaah0x6x+SazXbsRdd/6RttlcjJiEIgTwowWZVKD/DGgzB41WnT+rNosdFq9grss8ShMXqkZBQAh+QQJHgABACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJGjI+py+0PDZggPlptw3rTznCgIo5IaUrYZ67s6E5pnMHxfLe57eL9gjrtEsEDLfQiDoUy4NKYZK6QTdJTVVX+rFlp6qspAAAh+QQJHgABACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJQjI+py+1vgAQQTlrdzXrytn1LKCZkeZxooKbe00ZvJzGxOeM1nCO333PtaBjFT1jUXZLAofIGXTqbTGR0ag3KsNulTcuSVrtfaXkc5q7WjAIAOw==" style="height:20px;width: 20px;">');
+                    $(".music").html("Skylar Grey - Words");
+                    music.play();
+
+                }
+                break;
+            default:
+                break;
+        }
+    });
+
+</script>
+
+</body>
+</html>

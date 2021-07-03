@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lt IE 9]>
+<script type="text/javascript" src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+<script type="text/javascript" src="http://libs.useso.com/js/respond.js/1.4.2/respond.min.js"></script>
+<script type="text/javascript" src="http://cdn.bootcss.com/css3pie/2.0beta1/PIE_IE678.js"></script>
+<![endif]-->
+
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'h-ui/css/H-ui.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'h-ui.admin/css/H-ui.admin.css' %}" />
+{#    <link type="text/css" rel="stylesheet" href="font/font-awesome.min.css"/>#}
+
+    <!--[if IE 7]>
+<link href="http://www.bootcss.com/p/font-awesome/assets/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+    <title>add user</title>
+</head>
+<body>
+
+{#<form action="" method="post">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{#    <input type="submit" value="add ">#}
+{#</form>#}
+
+<div class="pd-20">
+    <div class="Huiform">
+        <form action="{% url 'film:superuser_add_check' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table class="table table-bg">
+                <tbody>
+                <tr>
+                    <th width="100" class="text-r"><span class="c-red">*</span> user name：</th>
+                    <td><input type="text" style="width:200px" class="input-text" value="" placeholder="user name" id="username" name="username" datatype="*2-16" nullmsg="user name不能为空" required><span style="color: #aa1111;font-size: 16px;margin-left:25px;" class="has_user"></span></td>
+                </tr>
+                <tr>
+                    <th width="100" class="text-r"> nick name: </th>
+                    <td><input type="text" style="width:200px" class="input-text" value="" placeholder="" id="nick-name" name="nick_name" datatype="*2-16" ></td>
+                </tr>
+                <tr>
+                    <th width="100" class="text-r">  name: </th>
+                    <td><input type="text" style="width:200px" class="input-text" value="" placeholder="" id="first_name" name="first_name" datatype="*2-16" ></td>
+                </tr>
+                <tr>
+                    <th width="100" class="text-r"><span class="c-red">*</span> password: </th>
+                    <td><input type="password" style="width:200px" class="input-text" value="" placeholder="password:" id="password" name="password" datatype="*2-16" nullmsg="密码不能为空" required></td>
+                </tr>
+                <tr>
+                    <th width="100" class="text-r"><span class="c-red">*</span> confirm password：</th>
+                    <td><input type="password" style="width:200px" class="input-text" value="" placeholder="confirm password" id="repassword" name="repassword" datatype="*2-16" nullmsg="确认密码不能为空" required></td>
+                </tr>
+                <tr>
+                    <th width="100" class="text-r">  age：</th>
+                    <td><input type="text" style="width:200px" class="input-text" value="" placeholder="" id="age" name="age" datatype="*2-16" ></td>
+                </tr>
+                <tr>
+                    <th class="text-r">  gender：</th>
+                    <td>
+                        <label><input name="gender" type="radio" id="six_1" value="Male" checked>Male</label>
+                        <label><input type="radio" name="gender" value="Female" id="six_0">Female</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-r"><span class="c-red">*</span> phone：</th>
+                    <td><input type="text" style="width:300px" class="input-text" value="" placeholder="phone" id="phone_num" name="phone_num" required nullmsg="   手机号"><span style="color: #aa1111;font-size: 16px;margin-left:25px;" class="has_phone_num"></span></td>
+                </tr>
+                <tr>
+                    <th class="text-r"><span class="c-red">*</span> email ：</th>
+                    <td><input type="text" style="width:300px" class="input-text" value="" placeholder="    email 地址" id="email" name="email" nullmsg="   user email " required><span style="color: #aa1111;font-size: 16px;margin-left:25px;" class="has_email"></span></td>
+                </tr>
+{#                <tr>#}
+{#                    <th class="text-r">头像：</th>#}
+{#                    <td><input type="file" class="" name="photo"></td>#}
+{#                </tr>#}
+{##}
+{#                <tr>#}
+{#                    <th class="text-r"> introduction ：</th>#}
+{#                    <td><textarea class="input-text" name="info" id="user-info" style="height:100px;width:300px;"></textarea></td>#}
+{#                </tr>#}
+                <tr>
+                    <th></th>
+                    <td><input class="btn btn-success radius" type="submit" value="commit">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
+
+<script type="text/javascript" src="{% static 'lib/jquery/1.9.1/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/layer/2.4/layer.js' %}"></script>
+<script type="text/javascript" src="{% static 'h-ui/js/H-ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'h-ui.admin/js/H-ui.admin.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/jquery.contextmenu/jquery.contextmenu.r2.js' %}"></script>
+<script type="text/javascript" src="{% static 'validform/Validform_v5.3.2_min.js' %}"></script>
+
+<script type="text/javascript">
+    $(".Huiform").Validform();
+</script>
+
+<script>
+
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
+
+
+    $('#username').bind('input propertychange','#username',function(){
+        value = $(this).val();
+        $.ajax({
+            url:"{% url 'film:username_check' %}?username=" + value,
+            success:function(data){
+                if (data.status == 0) {
+                    $('.has_user').html(data.msg);
+                    $('#username').focus();
+                    return false;
+                }
+                if (data.status == 1) {
+                    $('.has_user').html('');
+                }
+            }
+        })
+    });
+
+    $('#phone_num').bind('input propertychange',function(){
+        value = $(this).val();
+        $.ajax({
+            url:"{% url 'film:user_phone_num_check' %}?phone_num=" + value,
+            success:function(data){
+                if (data.status == 0) {
+                    $('.has_phone_num').html(data.msg);
+                    $('#phone_num').focus();
+                    return false;
+                }
+                else {
+                    $('.has_phone_num').html('');
+                }
+            }
+        })
+    });
+
+    $('#email').bind('input propertychange',function(){
+        value = $(this).val();
+        $.ajax({
+            url:"{% url 'film:user_email_check' %}?email=" + value,
+            success:function(data){
+                if (data.status == 0) {
+                    $('.has_email').html(data.msg);
+                    $('#email').focus();
+                    return false;
+                }
+                else {
+                    $('.has_email').html('');
+                }
+            }
+        })
+    });
+
+    $('form').submit(function(){
+        if ($('.has_user').val()!=''){
+            alert('user名已存在,请重新输入!!!');
+            return false;
+        }
+        password = $('#password').val();
+        repassword = $('#repassword').val();
+        if(password != repassword){
+            alert('两次输入密码不同,请重新输入密码');
+            $('#repassword').val('').focus();
+            return false;
+        }
+        var phone =$('#phone_num').val();
+         console.log(typeof(phone),phone);
+        var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+         console.log(myreg.test(phone));
+        if(!(myreg.test(phone))){
+            alert("手机号码输入有误，请重新输入");
+            $('#phone_num').val('');
+            $('#phone_num').focus();
+            return false;
+        }
+        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        email = $('#email').val();
+        if (filter.test(email)) return true;
+        else {
+            alert('您的电子邮件格式不正确,请重新输入');
+            $('#email').val('').focus();
+            return false;
+        }
+
+    });
+
+</script>
+

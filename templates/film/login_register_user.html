@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    {% load static %}
+    <style>
+        form{
+            width: 500px;
+
+            margin:100px auto 0;
+        }
+        td>input{
+            width: 380px;
+            height: 35px;
+            background: lightyellow;
+            border:2px solid gainsboro;
+        }
+        tr{
+            width: 500px;
+            height: 65px;
+
+        }
+        th{
+            width: 120px;
+            height: 40px;
+        }
+        .change{
+            width: 100px;
+            height:40px;
+            background: lightyellow;
+            border:2px solid lightgray;
+
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <h2 style="width: 100%; text-align: center">Sign up</h2>
+    <form action="{% url 'film:login_register_user_check' %}" method="post">
+
+        {% csrf_token %}
+        <table>
+
+            <tr>
+                <th>User name:</th>
+                <td><input type="text" placeholder="user name" class="username" id="username" name="username" required><span style="color: #aa1111;font-size: 16px;margin-left:25px;" class="has_user"> </span></td>
+            </tr>
+
+            <tr>
+                <th>Nick name:</th>
+                <td><input type="text" name="nick_name" id="nick_name" placeholder="nick name" required></td>
+            </tr>
+{##}
+{#            <tr>#}
+{#                <th>邮箱地址:</th>#}
+{#                <td><input type="text" placeholder="请输入您的邮箱" style="width: 200px;" id ="email" name="email" class="user_email" required><span class='send' style="width: 150px;height: 40px;font-size: 20px;display: inline-block;line-height: 40px;text-align: center;background:lightgoldenrodyellow;color: grey;margin-left:26px;">点击发送验证码</span><span style="color: #aa1111;font-size: 16px;margin-left:25px;" class="has_email"> </span></td>#}
+{#            </tr>#}
+
+{#            <tr>#}
+{#                <th>请输入验证码:</th>#}
+{#                <td><input type="text" placeholder="请输入邮箱验证码" id="yz" class="yz" required><li class="email_yzm" style="display: none;"></li></td>#}
+{#            </tr>#}
+
+            <tr>
+                <th>Phone:</th>
+                <td><input type="text" name="phone_num" placeholder="phone num" id="phone_num" required><span style="color: #aa1111;font-size: 16px;margin-left:25px;" class="has_phone_num"></span></td>
+            </tr>
+
+            <tr>
+                <th>Password:</th>
+                <td><input type="password" placeholder="password" id="password" name="password" required></td>
+            </tr>
+
+            <tr>
+                <th>Confirm password:</th>
+                <td><input type="password" placeholder="confirm password" id="repassword" name="repassword" required></td>
+            </tr>
+
+            <tr>
+                <th>Name:</th>
+                <td><input type="text" placeholder="name" name="first_name" required></td>
+            </tr>
+
+            <tr>
+                <th>Age:</th>
+                <td><input type="text" name="age" class="age" required placeholder="age"></td>
+            </tr>
+
+            <tr>
+                <th>Gender:</th>
+                <td><input type="text" name="gender" placeholder="just male, female or confidential" class="gender" required></td>
+            </tr>
+
+{#            <tr>#}
+{#                <th>头像:</th>#}
+{#                <td><input type="file" name="photo" placeholder="添加头像" class="photo" required></td>#}
+{#            </tr>#}
+
+        </table>
+
+        <input type="submit" value="Sign up" class="change register" style="margin-top: 20px;float: left ;border-radius: 10px;text-align: center;font-size: 20px">
+        <span class="change" style="margin-top: 20px;float: right;border-radius: 10px;font-size: 20px;text-align: center;line-height: 40px"><a
+                href="{% url 'film:login' %}" style="color:black;text-decoration:none;">Cancel</a></span>
+
+    </form>
+
+</body>
+</html>
+
+<script src="{% static 'JQuery.js' %}"></script>
+<script>
+
+    $('.send').click(function(){
+        user_email = $('.user_email').val();
+        console.log(user_email)
+        url = "{% url 'film:register_yzm' %}?email="+user_email;
+        $.ajax({
+                url:url,
+                success:function(data){
+                    if(data.status == '1'){
+                        alert(data.code);
+                        $('.email_yzm').val(data.yzm);
+
+                        console.log($('.email_yzm').val())
+                    }else{
+                        alert(data.msg)
+                    }
+                }
+            })
+    });
+
+
+    $('#username').bind('input propertychange','#username',function(){
+        value = $(this).val();
+
+        $.ajax({
+            url:"{% url 'film:username_check' %}?username=" + value,
+            success:function(data){
+                if (data.status == 0) {
+                    $('.has_user').html(data.msg);
+                    $('#username').focus();
+                    return false;
+                }
+                if (data.status == 1) {
+                    $('.has_user').html('');
+                }
+            }
+        })
+    });
+
+    $('#phone_num').bind('input propertychange',function(){
+        value = $(this).val();
+
+        $.ajax({
+            url:"{% url 'film:user_phone_num_check' %}?phone_num=" + value,
+            success:function(data){
+                if (data.status == 0) {
+                    $('.has_phone_num').html(data.msg);
+                    $('#phone_num').focus();
+                    return false;
+                }
+                else {
+                    $('.has_phone_num').html('');
+                }
+            }
+        })
+    });
+
+    $('#email').bind('input propertychange',function(){
+        value = $(this).val();
+
+        $.ajax({
+            url:"{% url 'film:user_email_check' %}?email=" + value,
+            success:function(data){
+                if (data.status == 0) {
+                    $('.has_email').html(data.msg);
+                    $('#email').focus();
+                    return false;
+                }
+                else {
+                    $('.has_email').html('');
+                }
+            }
+        })
+    });
+
+    $('form').submit(function(){
+
+        if ($('.has_user').val()!=''){
+            alert('user name已存在,请重新输入!!!');
+            return false;
+        }
+
+        if($('.yz').val() != $('.email_yzm').val()){
+            alert('验证码错误!!!');
+            $('.yz').focus();
+            return false;
+
+        }
+
+        password = $('#password').val();
+        repassword = $('#repassword').val();
+        if(password != repassword){
+            alert('两次输入密码不同,请重新输入密码');
+            $('#repassword').val('').focus();
+            return false;
+        }
+
+        var phone =$('#phone_num').val();
+         console.log(typeof(phone),phone);
+        var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+         console.log(myreg.test(phone));
+        if(!(myreg.test(phone))){
+            alert("手机号码输入有误，请重新输入");
+            $('#phone_num').val('');
+            $('#phone_num').focus();
+            return false;
+        }
+        //var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        //email = $('#email').val();
+       // if (filter.test(email)) return true;
+        //else {
+        //    alert('您的电子邮件格式不正确,请重新输入');
+        //    $('#email').val('').focus();
+        //    return false;
+        //}
+
+
+
+    });
+
+
+</script>

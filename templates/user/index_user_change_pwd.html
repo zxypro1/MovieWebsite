@@ -1,0 +1,351 @@
+
+<!DOCTYPE html>
+<head>
+
+    <title>XDDb-电影订票系统</title>
+
+    <meta charset="utf-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'film/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'swiper/swiper.min.css' %}">
+    <style>
+        body{
+            background: lightskyblue;
+        }
+        .header{
+            top:0;
+            left: 0;
+            margin:0;
+            padding: 0;
+            width: 100%;
+            height: 50px;
+            background: rgba(1,1,1,.9);
+            z-index: 99;
+            position:fixed;
+        }
+        .header-inner{
+            height: 50px;
+            margin-left:150px;
+            width: 250px;
+            margin-top: 0;
+        }
+        .s_title{
+            color: orangered;
+            font-size: 20px;
+            line-height: 50px;
+            width: 300px;
+        }
+
+        .custom-btn {
+	  width: 130px;
+	  height: 40px;
+	  border-radius: 5px;
+	  padding: 10px 25px;
+	  font-family: 'Lato', sans-serif;
+	  font-weight: 500;
+	  background: transparent;
+	  cursor: pointer;
+	  transition: all 0.3s ease;
+	  position: relative;
+	  display: inline-block;
+	   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+	   7px 7px 20px 0px rgba(0,0,0,.1),
+	   4px 4px 5px 0px rgba(0,0,0,.1);
+	  outline: none;
+	  text-align: center;
+	  margin: auto;
+	}
+    .btn-1 {
+	  background: orangered;
+	  background: linear-gradient(0deg, orange 0%, orangered 100%);
+	  border: none;
+	}
+        .s_title a{
+            color: white;
+            font-size: 20px;
+            line-height: 50px;
+        }
+        .user_name{
+            width: 300px;
+            height: 50px;
+            font-size: 16px;
+            line-height: 50px;
+            color:white
+        }
+
+
+        .main{
+            width: 1200px;
+            height: 800px;
+            background: lightskyblue;
+            margin: 70px auto 0;
+        }
+        .left{
+            width: 300px;
+            height: 100%;
+        }
+        .right{
+            width: 880px;
+            height: 100%;
+            background: ghostwhite;
+        }
+        .left_info{
+            width: 300px;
+            height: 230px;
+            background: rgb(100,100,100)
+        }
+        .userphoto{
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin:0 auto 0;
+            display: block;
+
+        }
+        .userphoto img{
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-top:20px;
+        }
+        .user_vip{
+            width: 300px;
+            height: 120px;
+            margin: 0;
+            padding: 0;
+        }
+        .username{
+            width: 300px;
+            height: 30px;
+            font-size: 16px;
+            line-height: 30px;
+            margin-top: 20px;
+            text-align: center;
+            color: white;
+        }
+        .user_power{
+            margin-top:50px;
+            width: 300px;
+            height: 50px;
+            font-size: 16px;
+            line-height: 25px;
+        }
+        .user_power li{
+            width: 100px;
+            height: 50px;
+            text-align: center;
+            color: white;
+        }
+        .left_nav{
+            background: white;
+            height: 570px;
+        }
+        .left_nav ul li{
+            width: 250px;
+            height: 50px;
+            margin-left:25px;
+            line-height:50px;
+            font-size: 20px;
+        }
+        .base_information{
+            width: 700px;
+            height: 50px;
+            margin-top:50px;
+            margin-left:50px;
+            font-size: 24px;
+            line-height: 50px;
+            border-bottom: 1px dashed gainsboro;
+        }
+        .pd{
+            width: 700px;
+            height: 500px;
+            margin-left:50px;
+            margin-top:30px;
+        {#            background: navajowhite;#}
+        }
+        form{
+            width: 500px;
+
+            margin:100px auto 0;
+        }
+        td>input{
+            width: 380px;
+            height: 35px;
+            background: lightyellow;
+            border:2px solid gainsboro;
+        }
+        tr{
+            width: 500px;
+            height: 65px;
+
+        }
+        th{
+            width: 120px;
+            height: 40px;
+        }
+        .change{
+            width: 100px;
+            height:40px;
+            background: lightyellow;
+            border:2px solid lightgray;
+
+        }
+    </style>
+</head>
+
+<html>
+<body>
+
+<div class="header">
+    <div class="header-inner fl">
+        <div class="s_title"><a class="s_title" href="{% url 'film:index' %}">XDDb</a></div>
+    </div>
+    <div class="user_name fr">
+        <ul>
+{#            <li class="fl">user:user</li>#}
+            <li class="fl"><img src="" alt=""></li>
+        </ul>
+    </div>
+
+</div>
+
+
+<div class="main">
+    <div class="left fl">
+        <div class="left_info">
+            <ul class="user_vip">
+                <li class="userphoto"><img src="{% static 'img/3.jpg' %}" alt=""></li>
+                <li class="username">{{ user.nick_name }}<span style="color: gold">{{ user.get_vip_display }}</span></li>
+            </ul>
+            <ul class="user_power">
+                <li class="fl">
+                    <span>My points</span><br>
+                    <span>{{ user.score }}</span>
+                </li>
+                <li class="fl" style="color: grey"><span>|</span><br><span>|</span></li>
+                <li class="fr">
+                    <span>Balance</span><br>
+                    <span>{{ user.money }}</span>
+                </li>
+            </ul>
+
+        </div>
+        <div class="left_nav">
+
+            <ul>
+                <li><a href="{% url 'film:index_user_message' %}">Message</a></li>
+                <li><a href="{% url 'film:index_user_bill' %}">My bills</a></li>
+                <li><a href="{% url 'film:index_user_change_pwd' %}">change password</a></li>
+                <li><a href="{% url 'film:login_out' %}?action=logout">log out</a></li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="right fr">
+        <div class="base_information">{{ user.nick_name }} Change my password</div>
+        <div class="pd">
+            <form action="{% url 'film:index_user_change_pwd_check' %}" method="post">
+
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <th>email:</th>
+                        <td><input type="text" placeholder="请输入您账户绑定的邮箱地址" style="width: 200px;" class = 'user_email' name = "user_email"><span style="width: 150px;height: 40px;font-size: 20px;display: inline-block;line-height: 40px;text-align: center;background:lightgoldenrodyellow;color: grey;margin-left:26px;" class="send">点击发送验证码</span></td>
+                    </tr>
+
+                    <tr>
+                        <th>verification code:</th>
+                        <td><input type="text" placeholder="请输入邮箱验证码" class="yz" name="yz"><li style="display: none" class="email_yzm"></li></td>
+                    </tr>
+
+                    <tr>
+                        <th>new password:</th>
+                        <td><input type="password" placeholder="请输入新密码" class="password" name="password"></td>
+                    </tr>
+
+                    <tr>
+                        <th>confirm password:</th>
+                        <td><input type="password" placeholder="请再次输入密码" class="repassword" name="repassword"></td>
+                    </tr>
+
+                </table>
+
+                <input type="submit" value="change" class="change sure" style="border-radius: 10px;text-align: center;font-size: 20px;margin: 20px auto 0;">
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
+<script src="{% static 'JQuery.js' %}"></script>
+
+<script>
+
+
+    $('.send').click(function(){
+        user_email = $('.user_email').val();
+        console.log(user_email);
+        url = "{% url 'film:yzm' %}?email="+user_email;
+        $.ajax({
+            url:url,
+            success:function(data){
+                if(data.status == '1'){
+                    alert(data.code);
+                    $('.email_yzm').val(data.yzm);
+                    {#                        alert($('.email_yzm').val())#}
+                }else{
+                    alert(data.msg)
+                }
+            }
+        })
+    });
+
+
+    if($('.yz').val() != $('.email_yzm').val()){
+        alert('验证码错误!!!');
+        $('.yz').focus();
+    }
+    $('.sure').click(function(){
+
+
+        if(!$('.user_email').val()){
+            alert('user邮箱不能为空!!!');
+            $('#user_email').focus();
+            return false;
+        }
+        if(!$('.yz').val()){
+            alert('验证码不能为空!!!');
+            $('#.yz').focus();
+            return false;
+        }
+        if($('.yz').val() != $('.email_yzm').val()){
+            alert('验证码错误!!!');
+            $('.yz').focus();
+            return false;
+
+        }
+        if(!$('.password').val()){
+            alert('新密码不能为空!!!');
+            $('.password').focus();
+            return false;
+        }
+        if(!$('.repassword').val()){
+            alert('确认密码不能为空!!!');
+            $('.repassword').focus();
+            return false;
+        }
+        if($('.repassword').val() != $('.repassword').val()){
+            alert('两次输入密码不同,请重新输入!!!');
+            $('.repassword').val('');
+            $('.repassword').focus();
+            return false;
+        }
+
+    })
+
+</script>

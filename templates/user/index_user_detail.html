@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<head>
+
+    <title>XDDb-电影订票系统</title>
+
+    <meta charset="utf-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'film/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'swiper/swiper.min.css' %}">
+    <style>
+        body{
+            background: lightskyblue;
+        }
+        .header{
+            top:0;
+            left: 0;
+            margin:0;
+            padding: 0;
+            width: 100%;
+            height: 50px;
+            background: rgba(1,1,1,.9);
+            z-index: 99;
+            position:fixed;
+        }
+        .header-inner{
+            height: 50px;
+            margin-left:150px;
+            width: 250px;
+            margin-top: 0;
+        }
+        .s_title{
+            color: orangered;
+            font-size: 20px;
+            line-height: 50px;
+            width: 300px;
+        }
+
+        .custom-btn {
+	  width: 130px;
+	  height: 40px;
+	  border-radius: 5px;
+	  padding: 10px 25px;
+	  font-family: 'Lato', sans-serif;
+	  font-weight: 500;
+	  background: transparent;
+	  cursor: pointer;
+	  transition: all 0.3s ease;
+	  position: relative;
+	  display: inline-block;
+	   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+	   7px 7px 20px 0px rgba(0,0,0,.1),
+	   4px 4px 5px 0px rgba(0,0,0,.1);
+	  outline: none;
+	  text-align: center;
+	  margin: auto;
+	}
+    .btn-1 {
+	  background: orangered;
+	  background: linear-gradient(0deg, orange 0%, orangered 100%);
+	  border: none;
+	}
+        .s_title a{
+            color: white;
+            font-size: 20px;
+            line-height: 50px;
+        }
+        .user_name{
+            width: 300px;
+            height: 50px;
+            font-size: 16px;
+            line-height: 50px;
+            color:white
+        }
+
+
+        .main{
+            width: 1200px;
+            height: 800px;
+            background: lightskyblue;
+            margin: 70px auto 0;
+        }
+        .left{
+            width: 300px;
+            height: 100%;
+        }
+        .right{
+            width: 880px;
+            height: 100%;
+            background: ghostwhite;
+        }
+        .left_info{
+            width: 300px;
+            height: 230px;
+            background: rgb(100,100,100)
+        }
+        .userphoto{
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin:0 auto 0;
+            display: block;
+
+        }
+        .userphoto img{
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-top:20px;
+        }
+        .user_vip{
+            width: 300px;
+            height: 120px;
+            margin: 0;
+            padding: 0;
+        }
+        .username{
+            width: 300px;
+            height: 30px;
+            font-size: 16px;
+            line-height: 30px;
+            margin-top: 20px;
+            text-align: center;
+            color: white;
+        }
+        .user_power{
+            margin-top:50px;
+            width: 300px;
+            height: 50px;
+            font-size: 16px;
+            line-height: 25px;
+        }
+        .user_power li{
+            width: 100px;
+            height: 50px;
+            text-align: center;
+            color: white;
+        }
+        .left_nav{
+            background: white;
+            height: 570px;
+        }
+        .left_nav ul li{
+            width: 250px;
+            height: 50px;
+            margin-left:25px;
+            line-height:50px;
+            font-size: 20px;
+        }
+        .base_information{
+            width: 700px;
+            height: 50px;
+            margin-top:50px;
+            margin-left:50px;
+            font-size: 24px;
+            line-height: 50px;
+            border-bottom: 1px dashed gainsboro;
+        }
+        .pd{
+            width: 700px;
+            height: 500px;
+            margin-left:50px;
+            margin-top:30px;
+{#            background: navajowhite;#}
+        }
+        tr{
+            width: 500px;
+            height: 40px;
+{#            background: indianred;#}
+            margin-left:30px;
+            margin-top: 20px;
+        }
+        td,th{
+            font-size: 20px;
+            line-height: 50px;
+        }
+        th{
+            width: 200px;
+        }
+
+    </style>
+</head>
+
+<html>
+<body>
+
+<div class="header">
+    <div class="header-inner fl">
+        <div class="s_title"><a class="s_title" href="{% url 'film:index' %}">XDDb</a></div>
+    </div>
+    <div class="user_name fr">
+        <ul>
+{#            <li class="fl">user:user</li>#}
+            <li class="fl"><img src="" alt=""></li>
+        </ul>
+    </div>
+
+</div>
+
+
+<div class="main">
+    <div class="left fl">
+        <div class="left_info">
+            <ul class="user_vip">
+                <li class="userphoto"><img src="{% static 'img/3.jpg' %}" alt=""></li>
+                <li class="username">{{ user.nick_name }}<span style="color: gold">{{ user.get_vip_display }}</span></li>
+            </ul>
+            <ul class="user_power">
+                <li class="fl">
+                    <span>My points</span><br>
+                    <span>{{ user.score }}</span>
+                </li>
+                <li class="fl" style="color: grey"><span>|</span><br><span>|</span></li>
+                <li class="fr">
+                    <span>Balance</span><br>
+                    <span>{{ user.money }}</span>
+                </li>
+            </ul>
+
+        </div>
+        <div class="left_nav">
+            <ul>
+                <li><a href="{% url 'film:index_user_message' %}">Message</a></li>
+                <li><a href="{% url 'film:index_user_bill' %}">My bills</a></li>
+                <li><a href="{% url 'film:index_user_change_pwd' %}">Change password</a></li>
+                <li><a href="{% url 'film:login_out' %}?action=logout">Log out</a></li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="right fr">
+    <div class="base_information">{{ user.nick_name }}'s user details</div>
+        <div class="pd">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th class="text-r" width="150">Username：</th>
+                    <td>{{ user.first_name }}</td>
+                </tr>
+                <tr>
+                    <th class="text-r" width="150">Age：</th>
+                    <td>{{ user.age }}</td>
+                </tr>
+                <tr>
+                    <th class="text-r" width="150">Gender：</th>
+                    <td>{{ user.gender }}</td>
+                </tr>
+                <tr>
+                    <th class="text-r">Phone：</th>
+                    <td>{{ user.phone_num }}</td>
+                </tr>
+                <tr>
+                    <th class="text-r">Email：</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th class="text-r">Registration time：</th>
+                    <td>{{ user.date_joined|date:'Y-m-d H:i:d' }}</td>
+                </tr>
+                <tr>
+                    <th class="text-r">VIP level：</th>
+                    <td>VIP:{{ user.vip }} </td>
+                </tr>
+                <tr>
+                    <th class="text-r">Current integral：</th>
+                    <td>{{ user.score }}  ''</td>
+                </tr>
+                <tr>
+                    <th class="text-r">Last login：</th>
+                    <td>{% if user.last_login %}{{ user.last_login|date:'Y-m-d H:i:d' }}
+                    {% else %}No history{% endif %}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
+<script src="{% static 'JQuery.js' %}"></script>
+
+
+<script>
+
+
+    $('.user_photo').mouseover(function(){
+        $('.login_out').show()
+    }).mouseleave(function(){
+        $('.login_out').hide()
+    });
+
+    $('.buy_movie').mouseover(function(){
+        $(this).css('background','orangered');
+        $(this).css('color','white')
+    }).mouseleave(function(){
+        $(this).css('background','#F0FFFF');
+        $(this).css('color','darkorange')
+
+    });
+
+    $('.navbar li').mouseover(function(){
+        $(this).children().css('color','#FF7F50')
+    }).mouseleave(function(){
+        $(this).children().css('color','white');
+        $('.first_page').css('color','orangered')
+
+    });
+    $('.hot_right_movie_list a li').mouseover(function(){
+        $(this).css('background','#FF7F50');
+        $(this).css('color','white');
+    }).mouseleave(function(){
+        $(this).css('background','white');
+        $(this).css('color','black');
+    })
+
+</script>

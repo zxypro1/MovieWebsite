@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<head>
+    <title>XDDb-电影订票系统</title>
+    <meta charset="utf-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'film/css/base.css' %}">
+    <style>
+        body{
+            background: black;
+        }
+        .header{
+            top:0;
+            left: 0;
+            margin:0;
+            padding: 0;
+            width: 100%;
+            height: 50px;
+            background: rgba(1,1,1,.9);
+            z-index: 99;
+            position:fixed;
+        }
+        .header-inner{
+            height: 50px;
+            margin-left:150px;
+            width: 250px;
+            margin-top: 0;
+        }
+        .s_title{
+            color: orangered;
+            font-size: 20px;
+            line-height: 50px;
+            width: 300px;
+        }
+
+        .custom-btn {
+	  width: 130px;
+	  height: 40px;
+	  border-radius: 5px;
+	  padding: 10px 25px;
+	  font-family: 'Lato', sans-serif;
+	  font-weight: 500;
+	  background: transparent;
+	  cursor: pointer;
+	  transition: all 0.3s ease;
+	  position: relative;
+	  display: inline-block;
+	   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+	   7px 7px 20px 0px rgba(0,0,0,.1),
+	   4px 4px 5px 0px rgba(0,0,0,.1);
+	  outline: none;
+	  text-align: center;
+	  margin: auto;
+	}
+    .btn-1 {
+	  background: orangered;
+	  background: linear-gradient(0deg, orange 0%, orangered 100%);
+	  border: none;
+	}
+        .user_info{
+            margin-right:100px;
+            width: 200px;
+            height: 50px;
+
+        }
+        .nav{
+            top: 0;
+            width: 600px;
+            height: 50px;
+            margin-left:40px;
+        }
+        .navbar li{
+            margin-left:80px;
+            font-size: 20px;
+            color: white;
+        }
+        .navbar li a{
+            color: white;
+            line-height: 50px;
+        }
+        .user_info{
+            margin-right:110px;
+            height: 50px;
+            width: 300px;
+        }
+        .user_info li{
+            color: white;
+            font-size: 20px;
+            line-height: 50px;
+            margin-left:20px;
+        }
+        .user_info li a{
+            color: white;
+            font-size: 20px;
+            line-height: 50px;
+        }
+        .user_photo{
+            width:150px;
+            height: 28px;
+
+        }
+
+        .user_photo .personal_photo{
+            width:28px;
+            height: 28px;
+            border-radius: 50%;
+            margin-top:10px;
+            border:1px solid white;
+        }
+
+        .personal_photo a img{
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+
+        }
+        .user_photo .login_out{
+            width: 100px;
+            margin-left:10px;
+
+
+        }
+        .search{
+            height: 30px;
+            width: 320px;
+            background: white;
+            top: 0;
+            margin-left:150px;
+            margin-top:10px;
+            border-radius:8px;
+            overflow: hidden;
+        }
+        .input input{
+            width: 266px;
+            height: 26px;
+        }
+        .input_sure input{
+            width: 50px;
+            height: 30px;
+        }
+        .main{
+            width: 1200px;
+            margin:60px auto 0;
+{#            background: lightgreen;#}
+            border: 1px dashed lightgray;
+        }
+
+        .movie{
+            width: 1200px;
+            height: 200px;
+            margin-bottom:30px;
+{#            background: plum;#}
+        }
+        #ranking{
+            width: 100px;
+            height: 200px;
+            line-height: 200px;
+            font-size: 40px;
+            text-align: center;
+            color: lightcyan;
+        }
+        .movie_image img{
+            width: 150px;
+            height: 200px;
+        }
+        .movie li{
+{#            margin-left:20px;#}
+            font-size: 16px;
+            line-height: 20px;
+        }
+        .movie_name,.movie_actor,.movie_count{
+            width: 900px;
+            height: 30px;
+{#            background: palevioletred;#}
+            margin-left: 270px;
+
+        }
+        .movie_info{
+            width: 900px;
+            height: 110px;
+{#            background: palevioletred;#}
+            margin-left: 270px;
+        }
+
+
+
+
+
+
+
+
+
+
+
+        .free {
+        width: 100%;
+        height: 180px;
+        margin-top: 35px;
+        margin-bottom: 0;
+        background: #12161c;
+        position: absolute;
+      }
+
+      .free > div {
+        width: 210px;
+        height: 110px;
+        border-left: 1px solid #212833;
+        margin-top: 35px;
+
+      }
+
+      .free > div:nth-child(1) {
+        margin-left: 10%;
+        border: none;
+      }
+        .free div p{
+            margin-left:74px;
+        }
+        .free div p:nth-child(1){
+            margin-top:13px;
+        }
+
+        .free div p a{
+            color:#808080;
+            font-size: 13px;
+            line-height: 24px;
+        }
+        .free div p:nth-child(1) a{
+            margin-top:13px;
+        }
+        .free div p a:hover{
+            color:white;
+        }
+
+
+
+    </style>
+</head>
+
+<html>
+<body>
+
+<div class="header">
+
+    <div class="header-inner fl">
+        <div class="s_title"><a class="s_title" href="{% url 'film:index' %}">XDDb</a></div>
+    </div>
+
+    <div class="nav fl">
+        <ul class="navbar">
+            <li class="fl"><a href="{% url 'film:index' %}">Home</a></li>
+            <li class="fl"><a href="{% url 'film:movie' %}">Movies</a></li>
+{#            <li class="fl"><a href="{% url 'film:movie_ranking' %}"  style="color:orangered;" class="movie_ranking">榜单</a></li>#}
+            <li class="fl"><a href="{% url 'film:mail' %}">Mall</a></li>
+            <li class="fl"><a href="{% url 'film:order' %}">Orders</a></li>
+
+        </ul>
+    </div>
+{#    <div class="search fl">#}
+{#        <form action="" method="post">#}
+{#            {% csrf_token %}#}
+{#            <ul>#}
+{#                <li class="input fl"><input type="text" placeholder="请输入你想看的movie"></li>#}
+{#                <li class="input_sure fl"><input type="submit" value="搜索"></li>#}
+{#            </ul>#}
+{#        </form>#}
+{#    </div>#}
+
+    <div class="user_info fr">
+
+        {% if user.is_active %}
+            <ul>
+                <li class="fl"><a href="{% url 'film:index_user_detail' %}">user:{{ user.username }}</a></li>
+                <li class="fl user_photo">
+                    <span class="personal_photo fl"><a href="{% url 'film:index_user_detail' %}"><img src="{% static 'img/default.jpg' %}" alt=""></a></span>
+                    <span class="login_out fl" style="display: none"><a href="{% url 'film:login_out' %}?action=logout" class="fl">sign out</a></span>
+                </li>
+            </ul>
+        {% else %}
+            <ul>
+                <li class="fl"><a href="{% url 'film:login' %}">sign in</a></li>
+                <li class="fl">|</li>
+                <li class="fl"><a href="{% url 'film:login_register_user' %}">sign up</a></li>
+            </ul>
+        {% endif %}
+    </div>
+</div>
+
+<div class="main">
+    <div class="movie_list">
+        {% for movie in movie_list %}
+        
+
+        
+        <ul class="movie">
+            <li class="fl ranking" id="ranking">1</li>
+            <li class="fl movie_image"><img src="{% url 'media' movie.poster %}" alt=""></li>
+            <li class="movie_name">{{ movie.film_name }}</li>
+            <li class="movie_actor">导演:{{ movie.director }}<span style="margin-left:30px;">   starring:{{ movie.actor }}</span></li>
+            <li class="movie_info">简介:{{ movie.film_info }}</li>
+            <li class="movie_count">评分:{{ movie.film_score }}分<span style="margin-left:30px;">{{ movie.comment_count }}人评价</span></li>
+        </ul>
+        {% endfor %}
+
+         <ul class="movie">
+
+             <li class="fl ranking" id="ranking">2</li>
+             <li class="fl movie_image"><img src="{% static 'img/login/3.jpg' %}" alt=""></li>
+             <li class="movie_name">肖申克的救赎</li>
+             <li class="movie_actor">导演:弗兰克.德拉邦特<span style="margin-left:30px;">   starring:蒂姆·罗宾斯 </span></li>
+             <li class="movie_info">简介:啦啦啦啦啦啦啦啦啦啦啦啦绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿啦啦啦啦啦啦啦啦啦啦啦啦绿绿绿绿绿绿绿绿绿绿绿绿绿啦啦啦啦啦啦啦啦啦啦啦啦绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿绿</li>
+             <li class="movie_count">评分:10分<span style="margin-left:30px;">12345678人评价</span></li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<div class="free fl clearF">
+    <div class="one fl">
+        <p><a href="">about us</a></p>
+        <p><a href="">Authority cooperation</a></p>
+        <p><a href="">Cooperation zone</a></p>
+        <p><a href="">Join us</a></p>
+    </div>
+    <div class="two fl">
+        <p><a href="">Shopping guide</a></p>
+        <p><a href="">buying process</a></p>
+        <p><a href="">Method of pay</a></p>
+        <p><a href=""> shipping process</a></p>
+    </div>
+    <div class="stree fl">
+        <p><a href="">After-sales</a></p>
+        <p><a href="">return process</a></p>
+        <p><a href="">deal with after</a></p>
+        <p><a href="">7 days</a></p>
+    </div>
+    <div class="fore fl">
+        <p><a href="">Help center</a></p>
+        <p><a href=""> registration process</a></p>
+        <p><a href="">Contact customer</a></p>
+        <p><a href="">Site map</a></p>
+    </div>
+    <div class="five fl">
+        <p><a href="">terms of service</a></p>
+        <p><a href="">maintenance</a></p>
+        <p><a href="">registration</a></p>
+        <p><a href="">Privacy statement </a></p>
+    </div>
+
+</div>
+
+</body>
+</html>
+<script src="{% static 'JQuery.js' %}"></script>
+
+<script>
+
+    $('.navbar li').mouseover(function(){
+        $(this).children().css('color','#FF7F50')
+    }).mouseleave(function(){
+        $(this).children().css('color','white');
+        $('.movie_ranking').css('color','orangered')
+    });
+
+
+    $('.hot_right_movie_list a li').mouseover(function(){
+        $(this).css('background','#FF7F50');
+        $(this).css('color','white');
+    }).mouseleave(function(){
+        $(this).css('background','white');
+        $(this).css('color','black');
+    })
+
+</script>
